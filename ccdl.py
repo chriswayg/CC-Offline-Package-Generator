@@ -152,6 +152,7 @@ DRIVER_XML = '''<DriverInfo>
 	</ProductInfo>
 	<RequestInfo>
 		<InstallDir>/Applications</InstallDir>
+		<InstallLanguage>{language}</InstallLanguage>
 	</RequestInfo>
 </DriverInfo>
 '''
@@ -359,7 +360,8 @@ if __name__ == '__main__':
 		dependencies = '\n'.join([DRIVER_XML_DEPENDENCY.format(
 			sapCode = d['sapCode'],
 			version = d['version']
-		) for d in prodInfo['dependencies']])
+		) for d in prodInfo['dependencies']]),
+		language = installLanguage
 	)
 
 	with open(os.path.join(dest, 'products', 'driver.xml'), 'w') as f:
