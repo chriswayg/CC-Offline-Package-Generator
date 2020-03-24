@@ -38,5 +38,4 @@ fi
 clear
 
 echo "${CYAN}starting ccdl${RESET}"
-#python3 <(curl -s https://gist.githubusercontent.com/ayyybe/a5f01c6f40020f9a7bc4939beeb2df1d/raw/ccdl.py)
-python3 <(curl -s https://pastebin.com/raw/dzYTCSHw)
+python3 <(curl -s https://gist.githubusercontent.com/ayyybe/a5f01c6f40020f9a7bc4939beeb2df1d/raw/ccdl.py)
