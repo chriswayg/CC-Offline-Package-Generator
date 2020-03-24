@@ -2,11 +2,14 @@
 import os
 import json
 import argparse
-import urllib3
+import requests
 import shutil
 from xml.etree import ElementTree as ET
 from collections import OrderedDict
 from subprocess import Popen, PIPE
+
+VERSION = 2
+VERSION_STR = '0.1.1'
 
 INSTALL_APP_APPLE_SCRIPT = '''
 const app = Application.currentApplication()
@@ -86,7 +89,8 @@ function run() {
 	const installFlag = argv.indexOf('-y') > -1
 
 	const appPath = app.pathTo(this).toString()
-	const driverPath = appPath.substring(0, appPath.lastIndexOf('/')) + '/products/driver.xml'
+	//const driverPath = appPath.substring(0, appPath.lastIndexOf('/')) + '/products/driver.xml'
+	const driverPath = appPath + '/Contents/Resources/products/driver.xml'
 	const hyperDrivePath = '/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Setup'
 
 	if (!installFlag) {
@@ -97,7 +101,7 @@ function run() {
 			cancelButton: 'Cancel'
 		})
 
-		const output = app.doShellScript(`${appPath}/Contents/MacOS/applet -y`, { administratorPrivileges: true })
+		const output = app.doShellScript(`"${appPath}/Contents/MacOS/applet" -y`, { administratorPrivileges: true })
 		const alert = JSON.parse(output)
 		alert.params ? app.displayAlert(alert.title, alert.params) : app.displayAlert(alert.title)
 		return
@@ -163,25 +167,21 @@ DRIVER_XML_DEPENDENCY = '''			<Dependency>
 				<EsdDirectory>./{sapCode}</EsdDirectory>
 			</Dependency>'''
 
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-http = urllib3.PoolManager()
+ADOBE_REQ_HEADERS = {
+	'X-Adobe-App-Id': 'accc-hdcore-desktop',
+	'User-Agent': 'Adobe Application Manager 2.0',
+	'X-Api-Key': 'CC_HD_ESD_1_0'
+}
 
 def dl(filename, url):
-	r = http.request('GET', url, preload_content=False, headers={
-		'X-Adobe-App-Id': 'accc-hdcore-desktop',
-		'User-Agent': 'Adobe Application Manager 2.0',
-		'X-Api-Key': 'CC_HD_ESD_1_0'
-	})
-
-	with open(filename, 'wb') as out_file:
-		shutil.copyfileobj(r, out_file)
+	with requests.get(url, stream=True, headers=ADOBE_REQ_HEADERS) as r:
+		with open(filename, 'wb') as f:
+			shutil.copyfileobj(r.raw, f)
 
 def r(url):
-	return http.request('GET', url, headers={
-		'X-Adobe-App-Id': 'accc-hdcore-desktop',
-		'User-Agent': 'Adobe Application Manager 2.0',
-		'X-Api-Key': 'CC_HD_ESD_1_0'
-	}).data.decode('utf-8')
+	req = requests.get(url, headers=ADOBE_REQ_HEADERS)
+	req.encoding = 'utf-8'
+	return req.text
 
 def get_products_xml():
 	return ET.fromstring(r(ADOBE_PRODUCTS_XML_URL))
@@ -221,7 +221,7 @@ def get_application_json(sapCode, version):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
-	parser.add_argument('-l', '--installLanguage', help='Language code (defaults to \'en_US\'', action='store', default='en_US')
+	parser.add_argument('-l', '--installLanguage', help='Language code (eg. en_US)', action='store')
 	parser.add_argument('-s', '--sapCode', help='SAP code for desired product (eg. PHSP)', action='store')
 	parser.add_argument('-v', '--version', help='Version of desired product (eg. 21.0.3)', action='store')
 	parser.add_argument('-d', '--destination', help='Directory to download installation files to', action='store')
@@ -229,7 +229,11 @@ if __name__ == '__main__':
 
 	print('=================================')
 	print('= Adobe macOS Package Generator =')
-	print('============= 0.1.0 =============\n')
+	print('============= {} =============\n'.format(VERSION_STR))
+
+	if (not os.path.isfile('/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Setup')):
+		print('Adobe HyperDrive installer not found.\nPlease make sure the Creative Cloud app is installed.')
+		exit(1)
 
 	print('Downloading products.xml\n')
 	products_xml = get_products_xml()
@@ -243,7 +247,7 @@ if __name__ == '__main__':
 	sapCode = None
 	if (args.sapCode):
 		if products.get(args.sapCode):
-			print('\nUsing provided SAP Code: '  +  args.sapCode)
+			print('\nUsing provided SAP Code: ' + args.sapCode)
 			sapCode = args.sapCode
 		else:
 			print('\nProvided SAP Code not found in products: ' + args.sapCode)
@@ -266,7 +270,7 @@ if __name__ == '__main__':
 	version = None
 	if (args.version):
 		if versions.get(args.version):
-			print('\nUsing provided version: '  +  args.version)
+			print('\nUsing provided version: ' + args.version)
 			version = args.version
 		else:
 			print('\nProvided version not found: ' + args.version)
@@ -286,27 +290,67 @@ if __name__ == '__main__':
 
 	print('')
 
-	prodInfo = versions[version]
-	installLanguage = args.installLanguage
-	dest = args.destination or '{}_{}-{}'.format(sapCode, version, installLanguage)
+	langs = [ 'en_US', 'en_GB', 'en_IL', 'en_AE', 'es_ES', 'es_MX', 'pt_BR', 'fr_FR', 'fr_CA', 'fr_MA', 'it_IT', 'de_DE', 'nl_NL', 'ru_RU', 'uk_UA', 'zh_TW', 'zh_CN', 'ja_JP', 'ko_KR', 'pl_PL', 'hu_HU', 'cs_CZ', 'tr_TR', 'sv_SE', 'nb_NO', 'fi_FI', 'da_DK' ]
+	installLanguage = None
+	if (args.installLanguage):
+		if (args.installLanguage in langs):
+			print('\nUsing provided language: ' + args.installLanguage)
+			installLanguage = args.installLanguage
+		else:
+			print('\nProvided language not available: ' + args.installLanguage)
 
-	print('installLanguage: ' + installLanguage)
+	if not installLanguage:
+		print('Available languages: {}'.format(', '.join(langs)))
+		while installLanguage is None:
+			val = input('\nPlease enter the desired install language, or nothing for [en_US]: ') or 'en_US'
+			if (val in langs):
+				installLanguage = val
+			else:
+				print('{} is not available. Please use a value from the list above.'.format(val))
+
+	dest = None
+	if (args.destination):
+		print('\nUsing provided destination: ' + args.destination)
+		dest = args.destination
+	else:
+		print('\nPlease navigate to the desired downloads folder, or cancel to abort.')
+		p = Popen(['/usr/bin/osascript', '-e', 'tell application (path to frontmost application as text)\nset _path to choose folder\nPOSIX path of _path\nend'], stdout=PIPE)
+		dest = p.communicate()[0].decode('utf-8').strip()
+		if (p.returncode != 0):
+			print('Exiting...')
+			exit()
+
+	print('')
+
+
+	install_app_name = 'Install {}_{}-{}.app'.format(sapCode, version, installLanguage)
+	install_app_path = os.path.join(dest, install_app_name)
+
 	print('sapCode: ' + sapCode)
 	print('version: ' + version)
-	print('dest: ' + dest)
+	print('installLanguage: ' + installLanguage)
+	print('dest: ' + install_app_path)
 
-	
-	#print(get_application_json('CORE', '1.0'))
-
+	prodInfo = versions[version]
 	prods_to_download = [{ 'sapCode': d['sapCode'], 'version': d['version'] } for d in prodInfo['dependencies']]
 	prods_to_download.insert(0, { 'sapCode': prodInfo['sapCode'], 'version': prodInfo['version'] })
-	#print(prods_to_download)
 
-	print ('\nPreparing...\n')
+	print('\nCreating {}'.format(install_app_name))
+
+	install_app_path = os.path.join(dest, 'Install {}_{}-{}.app'.format(sapCode, version, installLanguage))
+	with Popen(['/usr/bin/osacompile', '-l', 'JavaScript', '-o', os.path.join(dest, install_app_path)], stdin=PIPE) as p:
+		p.communicate(INSTALL_APP_APPLE_SCRIPT.encode('utf-8'))
+
+	icon_path = '/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Install.app/Contents/Resources/app.icns'
+	shutil.copyfile(icon_path, os.path.join(install_app_path, 'Contents', 'Resources', 'applet.icns'))
+
+	products_dir = os.path.join(install_app_path, 'Contents', 'Resources', 'products')
+
+	print('\nPreparing...\n')
 
 	for p in prods_to_download:
 		s, v = p['sapCode'], p['version']
-		product_dir = os.path.join(dest, 'products', s)
+		product_dir = os.path.join(products_dir, s)
 		app_json_path = os.path.join(product_dir, 'application.json')
 
 		print('[{}_{}] Downloading application.json'.format(s, v))
@@ -327,7 +371,7 @@ if __name__ == '__main__':
 	for p in prods_to_download:
 		s, v = p['sapCode'], p['version']
 		app_json = p['application_json']
-		product_dir = os.path.join(dest, 'products', s)
+		product_dir = os.path.join(products_dir, s)
 
 		print('[{}_{}] Parsing available packages'.format(s, v))
 		core_pkg_count = 0
@@ -364,16 +408,8 @@ if __name__ == '__main__':
 		language = installLanguage
 	)
 
-	with open(os.path.join(dest, 'products', 'driver.xml'), 'w') as f:
+	with open(os.path.join(products_dir, 'driver.xml'), 'w') as f:
 		f.write(driver)
 		f.close()
 
-	print('\nCreating Install.app')
-
-	with Popen(['/usr/bin/osacompile', '-l', 'JavaScript', '-o', os.path.join(dest, 'Install.app')], stdin=PIPE) as p:
-		p.communicate(INSTALL_APP_APPLE_SCRIPT.encode('utf-8'))
-
-	iconPath = '/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Install.app/Contents/Resources/app.icns'
-	shutil.copyfile(iconPath, os.path.join(dest, 'Install.app', 'Contents', 'Resources', 'applet.icns'))
-
-	print('\nPackage successfully created. Run Install.app inside the destination folder to install.')
+	print('\nPackage successfully created. Run {} to install.'.format(install_app_path))
