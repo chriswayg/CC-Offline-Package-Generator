@@ -260,7 +260,9 @@ if __name__ == '__main__':
 
 		while sapCode is None:
 			val = input('\nPlease enter the SAP Code of the desired product (eg. PHSP for Photoshop): ')
-			if products.get(val):
+			if val == 'APRO':
+				print('\033[1;31mAcrobat is currently broken, please sit tight while I try to find a solution.\nAll other products are functional.\033[0m')
+			elif products.get(val):
 				sapCode = val
 			else:
 				print('{} is not a valid SAP Code. Please use a value from the list above.'.format(val))
