@@ -3,13 +3,14 @@ import os
 import json
 import argparse
 import requests
+session = requests.Session()
 import shutil
 from xml.etree import ElementTree as ET
 from collections import OrderedDict
 from subprocess import Popen, PIPE
 
-VERSION = 2
-VERSION_STR = '0.1.1'
+VERSION = 3
+VERSION_STR = '0.1.2'
 
 INSTALL_APP_APPLE_SCRIPT = '''
 const app = Application.currentApplication()
@@ -140,7 +141,8 @@ function run() {
 '''
 
 #ADOBE_PRODUCTS_XML_URL = 'https://prod-rel-ffc-ccm.oobesaas.adobe.com/adobe-ffc-external/core/v4/products/all?_type=xml&channel=ccm,sti&platform=osx10,osx10-64&productType=Desktop'
-ADOBE_PRODUCTS_XML_URL = 'https://prod-rel-ffc-ccm.oobesaas.adobe.com/adobe-ffc-external/core/v4/products/all?_type=xml&channel=ccm&platform=osx10,osx10-64&productType=Desktop'
+POPULATE_ADOBE_COOKIES_URL = 'https://adobeid-na1.services.adobe.com/ims/check/v4/token?client_id=CreativeCloud_v5_1'
+ADOBE_PRODUCTS_XML_URL = 'https://prod-rel-ffc-ccm.oobesaas.adobe.com/adobe-ffc-external/core/v4/products/all?_type=xml&channel=ccm&platform=osx10-64&productType=Desktop'
 ADOBE_APPLICATION_JSON_URL = 'https://prod-rel-ffc-ccm.oobesaas.adobe.com/adobe-ffc-external/core/v2/applications?name={name}&version={version}&platform={platform}'
 
 DRIVER_XML = '''<DriverInfo>
@@ -174,12 +176,12 @@ ADOBE_REQ_HEADERS = {
 }
 
 def dl(filename, url):
-	with requests.get(url, stream=True, headers=ADOBE_REQ_HEADERS) as r:
+	with session.get(url, stream=True, headers=ADOBE_REQ_HEADERS) as r:
 		with open(filename, 'wb') as f:
 			shutil.copyfileobj(r.raw, f)
 
 def r(url):
-	req = requests.get(url, headers=ADOBE_REQ_HEADERS)
+	req = session.get(url, headers=ADOBE_REQ_HEADERS)
 	req.encoding = 'utf-8'
 	return req.text
 
@@ -234,6 +236,9 @@ if __name__ == '__main__':
 	if (not os.path.isfile('/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Setup')):
 		print('Adobe HyperDrive installer not found.\nPlease make sure the Creative Cloud app is installed.')
 		exit(1)
+
+	print('Populating .adobe.com cookies')
+	session.post(POPULATE_ADOBE_COOKIES_URL, headers=ADOBE_REQ_HEADERS)
 
 	print('Downloading products.xml\n')
 	products_xml = get_products_xml()
