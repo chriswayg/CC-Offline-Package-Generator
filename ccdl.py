@@ -9,6 +9,8 @@ from xml.etree import ElementTree as ET
 from collections import OrderedDict
 from subprocess import Popen, PIPE
 
+from tqdm import tqdm
+
 VERSION = 3
 VERSION_STR = '0.1.2'
 
@@ -175,11 +177,16 @@ ADOBE_REQ_HEADERS = {
 	'X-Api-Key': 'CC_HD_ESD_1_0'
 }
 
-def dl(filename, url):
+def dl(filename, url, name):
 	with session.get(url, stream=True, headers=ADOBE_REQ_HEADERS) as r:
+		total_size = int(r.headers["Content-Length"])
+		chunkSize = 1000
+		bars = int(total_size / chunkSize)
 		with open(filename, 'wb') as f:
-			shutil.copyfileobj(r.raw, f)
-
+			for chunk in tqdm(r.iter_content(chunk_size=chunkSize), total=bars, unit='B', unit_scale=True, unit_divisor=chunkSize, desc=name,
+				bar_format="{l_bar}{bar}|{n_fmt}/{total_fmt} [{remaining} remaining]", leave=False, dynamic_ncols=True, smoothing=0):
+				f.write(chunk)
+				
 def r(url):
 	req = session.get(url, headers=ADOBE_REQ_HEADERS)
 	req.encoding = 'utf-8'
@@ -400,7 +407,7 @@ if __name__ == '__main__':
 		for url in download_urls:
 			name = url.split('/')[-1].split('?')[0]
 			print('[{}_{}] Downloading {}'.format(s, v, name))
-			dl(os.path.join(product_dir, name), url)
+			dl(os.path.join(product_dir, name), url, name)
 
 	print('\nGenerating driver.xml')
 
