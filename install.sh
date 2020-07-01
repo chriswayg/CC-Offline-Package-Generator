@@ -3,7 +3,7 @@
 CYAN="$(tput bold; tput setaf 6)"
 RESET="$(tput sgr0)"
 
-curl https://gist.githubusercontent.com/ayyybe/a5f01c6f40020f9a7bc4939beeb2df1d/raw/ccdl.command -o "/Applications/Adobe Packager.command"
+curl https://gist.githubusercontent.com/jorisguex/c62b7fcbedd7b3ace800c04c962c66fa/raw/ccdl.command -o "/Applications/Adobe Packager.command"
 chmod +x "/Applications/Adobe Packager.command"
 
 clear
