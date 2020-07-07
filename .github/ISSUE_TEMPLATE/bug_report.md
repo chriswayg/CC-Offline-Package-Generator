@@ -13,16 +13,15 @@ A clear and concise description of what the bug is.
 **Steps to reproduce the behavior**
 
 1. Which method did you use to run the script? 
-     - did you run via `CC_Offline_Package_Generator.dmg`?
-     - or via the Terminal command `/bin/bash -c "$(curl -fsSL https://gist.githubusercontent...` and then the `CC Offline Package Generator.command`?
-     - or did you try to run  the Python script directly?
-
-If one method did not work, please also try the other before posting a bug report.
+    - did you run via `CC_Offline_Package_Generator.dmg`?
+    - or via the Terminal command `/bin/bash -c "$(curl -fsSL https://gist.githubusercontent...` and then the `CC Offline Package Generator.command`?
+    - or did you try to run  the Python script directly?
+    - *If one method did not work, please also try another before posting a bug report.*
 	
 2. At what step did something not work?
-	* Did the issue occur when downloading and creating the installer package?
+	- Did the issue occur when downloading and creating the installer package?
 
-    * Or did the issue occur when you tried install an Adobe application with the created installer? Which Adobe application? Which exact version number?
+    - Or did the issue occur when you tried install an Adobe application with the created installer? Which Adobe application? Which exact version number?
 
 3. What was the Error message, if any?
 
