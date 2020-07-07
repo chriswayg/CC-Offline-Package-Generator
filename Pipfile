@@ -9,7 +9,6 @@ verify_ssl = true
 pyinstaller = "*"
 requests = "*"
 tqdm = "*"
-setuptools = "*"
 
 [requires]
 python_version = "3.7"
