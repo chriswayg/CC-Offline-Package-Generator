@@ -32,7 +32,7 @@ printf  "${color}*** creating the binary python 'ppackage' with pyinstaller...${
 pipenv install
 pyinstaller ccdl.spec
 
-printf  "${color}***creating the .app bundle with Platypus...${reset}\n"
+printf  "${color}*** creating the .app bundle with Platypus...${reset}\n"
 mkdir -p dmg/createdmg
 mv dist/ppackage app/
 cd app
