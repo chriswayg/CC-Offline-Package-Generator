@@ -1,6 +1,7 @@
 #!/usr/bin/osascript
 set run_cmd to (POSIX path of ((path to me as text) & "::") & "ppackage") as text
 
+# TODO improve the way Terminal is launched with a more reliable way of actiivating a resizing the intended window
 if application "Terminal" is running then
 	tell application "Terminal"
 		# do script without "in window" will open a new window
