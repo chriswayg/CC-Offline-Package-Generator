@@ -12,7 +12,7 @@
 	<string>chriswayg</string>
 	<key>BundledFiles</key>
 	<array>
-		<string>ppackage</string>
+		<string>CC-Offline-Package-Generator</string>
 	</array>
 	<key>Creator</key>
 	<string>Platypus-5.3</string>

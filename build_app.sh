@@ -26,15 +26,15 @@ fi
 
 printf  "${color}*** cleaning up before build...${reset}\n"
 rm -rf build/ dist/
-[[ -f app/ppackage ]] && rm app/ppackage
+[[ -f app/CC-Offline-Package-Generator ]] && rm app/CC-Offline-Package-Generator
 
-printf  "${color}*** creating the binary python 'ppackage' with pyinstaller...${reset}\n"
+printf  "${color}*** creating the binary python 'CC-Offline-Package-Generator' with pyinstaller...${reset}\n"
 pipenv install
 pyinstaller ccdl.spec
 
 printf  "${color}*** creating the .app bundle with Platypus...${reset}\n"
 mkdir -p dmg/createdmg
-mv dist/ppackage app/
+mv dist/CC-Offline-Package-Generator app/
 cd app
 rm -rf "../dmg/createdmg/CC_Offline_Package_Generator.app"
 platypus -P app_bundle_config.platypus "../dmg/createdmg/CC_Offline_Package_Generator.app"
