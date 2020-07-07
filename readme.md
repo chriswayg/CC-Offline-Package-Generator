@@ -18,6 +18,11 @@ There is no equivalent list of Adobe CC 2020 direct download links available at 
 
 Download location: https://github.com/chriswayg/CC-Offline-Package-Generator/releases/
 
+![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage00.png)
+
+Allow access to launch the Terminal window
+![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage00b.png)
+
 The CC_Offline_Package_Generator script will download a list of all products from Adobe and prompt you to choose the product, version, language, and destination folder for the installer.
 
 ![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage01.png)
@@ -25,11 +30,24 @@ The CC_Offline_Package_Generator script will download a list of all products fro
 
 After that you just have to sit back and wait for it to finish. The script will download all required files, and then generate a convenient installer and place it in the destination directory. When prompted, select a destination folder where you want to save the installer.
 
-![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage04.png)
+![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage03.png)
 
 Now you can run the "Install [product]" app created in the destination folder, or save it for later offline installation.
 
+![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage04.png)
+
+Make sure you install the [Adobe Creative Cloud App](https://creativecloud.adobe.com/apps/download/creative-cloud) first on the computers where you intend to run the installer. Most installers should work, but some will not. See *Known Issues* below for details.
+
 ![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage05.png)
+![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage06.png)
+![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage07.png)
+
+### Known issues
+
+Currently most installers work, but the following are known not to work:
+- Acrobat does not show up in the list, as is not made available form the Adobe servers in the same way.
+- Muse (Install MUSE_2018.1.1-en_US) will stop with an error, but inside the installer app folder the app in AdobeMuse2018.1.1-core.zip will work in English. Alternatively ProDesign Tools has a download link for Muse_2018_0_CC_LS24.dmg
+- Lightroom CC (Install LRCC_3.3-en_US) will stop with an error, but Lightroom Classic (Install LTRM_9.3-en_US) works fine.
 
 ### Technical notes:
 The *CC_Offline_Package_Generator* binary file was built with via `pyinstaller pyinstall.spec`on macOS High Sierra 10.13.6. This means it should theoretically be compatible with High Sierra, Mojave, Catalina, and Big Sur. The python virtual environment was created with `pipenv`. The binary already includes Python inside, so there is no need to install Python to run CC_Offline_Package_Generator.
