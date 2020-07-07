@@ -5,6 +5,7 @@ dist/
 *.dmg
 *.zip
 scratch.txt
+/app/ppackage
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
@@ -175,3 +176,4 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
