@@ -5,7 +5,8 @@ dist/
 *.dmg
 *.zip
 scratch.txt
-/app/CC-Offline-Package-Generator
+app/CC-Offline-Package-Generator
+app/build_env.txt
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
