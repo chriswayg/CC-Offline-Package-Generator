@@ -13,6 +13,7 @@
 	<key>BundledFiles</key>
 	<array>
 		<string>CC-Offline-Package-Generator</string>
+		<string>build_env.txt</string>
 	</array>
 	<key>Creator</key>
 	<string>Platypus-5.3</string>

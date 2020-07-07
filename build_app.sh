@@ -30,7 +30,17 @@ rm -rf build/ dist/
 
 printf  "${color}*** creating the binary python 'CC-Offline-Package-Generator' with pyinstaller...${reset}\n"
 pipenv install
-pyinstaller ccdl.spec
+pyinstaller pyinstall.spec
+
+date +"Date: %Y-%m-%d %H:%M" > app/build_env.txt
+printf "\n$ sw_vers -productVersion\n" >> app/build_env.txt
+sw_vers -productVersion >> app/build_env.txt
+printf "\n$ python -V\n" >> app/build_env.txt
+python -V >> app/build_env.txt
+printf "\n$ pip list\n" >> app/build_env.txt
+pip list  >> app/build_env.txt
+printf "\n$ brew list --versions\n"  >> app/build_env.txt
+brew list --versions >> app/build_env.txt
 
 printf  "${color}*** creating the .app bundle with Platypus...${reset}\n"
 mkdir -p dmg/createdmg
@@ -56,4 +66,5 @@ create-dmg \
   --app-drop-link 350 155 \
   "CC_Offline_Package_Generator.dmg" \
   "createdmg"
+
 printf  "${color}*** The installer has been created in dmg/CC_Offline_Package_Generator.dmg${reset}\n"
