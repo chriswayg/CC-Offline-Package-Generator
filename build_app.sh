@@ -32,15 +32,21 @@ printf  "${color}*** creating the binary python 'CC-Offline-Package-Generator' w
 pipenv install
 pyinstaller pyinstall.spec
 
-date +"Date: %Y-%m-%d %H:%M" > app/build_env.txt
-printf "\n$ sw_vers -productVersion\n" >> app/build_env.txt
-sw_vers -productVersion >> app/build_env.txt
-printf "\n$ python -V\n" >> app/build_env.txt
-python -V >> app/build_env.txt
-printf "\n$ pip list\n" >> app/build_env.txt
-pip list  >> app/build_env.txt
-printf "\n$ brew list --versions\n"  >> app/build_env.txt
-brew list --versions >> app/build_env.txt
+{
+date +"Date: %Y-%m-%d %H:%M"
+printf "\n$ sw_vers -productVersion\n"
+sw_vers -productVersion
+printf "\n$ python -V\n"
+python -V
+printf "\n$ pipenv --version\n"
+pipenv --version
+printf "\n$ pipenv graph\n"
+pipenv graph
+printf "\n$ pip list\n"
+pip list
+printf "\n$ brew list --versions\n"
+brew list --versions
+} > app/build_env.txt
 
 printf  "${color}*** creating the .app bundle with Platypus...${reset}\n"
 mkdir -p dmg/createdmg
