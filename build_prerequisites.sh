@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 
-cyan="$(tput bold; tput setaf 6)"
+cyan="$(tput bold; tput setaf 5)"
 reset="$(tput sgr0)"
 
  printf "\n*** Checking for build requirements and installing them, if missing...\n"
@@ -34,5 +34,8 @@ command -v platypus >/dev/null 2>&1  || brew install platypus
 command -v create-dmg >/dev/null 2>&1 || brew install create-dmg
 command -v pipenv >/dev/null 2>&1 || pip3 install pipenv==2020.5.28
 
-echo "${cyan}Looks good! Run 'pipenv shell' first, as the build script"
+# set language environment to prevent pip locale errors
+echo -e 'export LC_ALL=en_US.UTF-8\nexport LANG=en_US.UTF-8' >> ~/.bash_profile
+
+echo "${cyan}Looks good! Open a new shell and run 'pipenv shell' first, as the build script"
 echo "should be run in a virtual environment. Then run build_app.sh ${reset}"
