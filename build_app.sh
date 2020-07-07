@@ -6,7 +6,7 @@ reset="$(tput sgr0)"
 
 printf "${color}*** Checking for build prerequisites${reset}\n"
 
-[[ -d "$(xcode-select -p)" ]]  || { echo "${color}Xcode tools are missing! Run build_prerequisites.sh first.${reset}\n" && echo "exit 1"; }
+[[ -d "$(xcode-select -p)" ]]  || { echo "${color}Xcode tools are missing! Run build_prerequisites.sh first.${reset}\n" && exit 1; }
 
 checkPrereqs=("python3.7" \
               "brew" \
@@ -15,12 +15,14 @@ checkPrereqs=("python3.7" \
               "pipenv")
 
 for prereq in ${checkPrereqs[@]}; do
-    command -v $prereq > /dev/null 2>&1  || { echo "${color}$prereq is missing! Run build_prerequisites.sh first.${reset}\n" && echo "exit 1"; }
+    command -v $prereq > /dev/null 2>&1  || { printf "${color}$prereq is missing! Run build_prerequisites.sh first.${reset}\n" && exit 1; }
 done
 
 [[ -z $VIRTUAL_ENV ]] && printf "${color}Run 'pipenv shell' first, as this build script needs to run in a virtual environment.${reset}\n" && exit 1
 
-[[ -d /Volumes/CC_Offline_Package_Generator/CC_Offline_Package_Generator.app ]] && hdiutil detach /Volumes/CC_Offline_Package_Generator
+if [[ -d /Volumes/CC_Offline_Package_Generator/CC_Offline_Package_Generator.app ]]; then
+    hdiutil detach /Volumes/CC_Offline_Package_Generator  || { printf  "${color}*** Ensure that Adobe_Offline_Package_Generator.dmg is unmounted!${reset}\n" && exit 1; }
+fi
 
 printf  "${color}*** cleaning up before build...${reset}\n"
 rm -rf build/ dist/
@@ -54,4 +56,4 @@ create-dmg \
   --app-drop-link 350 155 \
   "CC_Offline_Package_Generator.dmg" \
   "createdmg"
-printf  "${color}*** The installer has been created in dmg/CC_Offline_Package_Generator.dmg...${reset}\n"
+printf  "${color}*** The installer has been created in dmg/CC_Offline_Package_Generator.dmg${reset}\n"
