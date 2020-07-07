@@ -255,7 +255,7 @@ if __name__ == '__main__':
             'Creative Cloud app not found.\nPlease download and install from: https://creativecloud.adobe.com/apps/download/creative-cloud\n')
         exit(1)
 
-    print('Populating .adobe.com cookies')
+    #print('Populating .adobe.com cookies')
     session.post(POPULATE_ADOBE_COOKIES_URL, headers=ADOBE_REQ_HEADERS)
 
     print('Downloading products.xml\n')
