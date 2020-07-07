@@ -244,9 +244,9 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--destination', help='Directory to download installation files to', action='store')
     args = parser.parse_args()
 
-    print('=================================')
-    print('=== CC macOS Package Generator ==')
-    print('============ {} ============\n'.format(VERSION_STR))
+    print('====================================')
+    print('=== CC Offline Package Generator ===')
+    print('============== {} =============\n'.format(VERSION_STR))
     print('More info: https://github.com/chriswayg/CC-Offline-Package-Generator')
     print('           https://gist.github.com/ayyybe/a5f01c6f40020f9a7bc4939beeb2df1d\n')
 
