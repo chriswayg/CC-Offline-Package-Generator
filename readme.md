@@ -12,9 +12,9 @@ There is no equivalent list of Adobe CC 2020 direct download links available at 
 
 ### Usage
 
-1. First download and install the [Adobe Creative Cloud App](https://creativecloud.adobe.com/apps/download/creative-cloud) from that page or [from here](https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/5_1/osx10/ACCCx5_1_0_407.dmg). The Adobe Offline Package Generator will not run unless this app has been installed first. You need an Adobe account when installing this app.
+1. First download and install from Adobe the [Creative Cloud - Offline Installer (180MB)](https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/5_1/osx10/ACCCx5_1_0_407.dmg ) or the [Creative Cloud - Online Installer (2.5MB)](https://creativecloud.adobe.com/apps/download/creative-cloud). The CC Offline Package Generator will not run unless the Adobe Creative Cloud app has been installed first. You need an Adobe account when installing this app.
 
-2. Then [download CC_Offline_Package_Generator.dmg](https://github.com/chriswayg/CC-Offline-Package-Generator/releases/), mount it and copy `CC_Offline_Package_Generator` to Applications. Run the app and it will open a Terminal window. Then follow the on-screen instructions. Tested on High Sierra, Mojave and Catalina.
+2. Then download the [CC_Offline_Package_Generator.dmg](https://github.com/chriswayg/CC-Offline-Package-Generator/releases/), mount it and copy `CC_Offline_Package_Generator` to Applications. Run the app and it will open a Terminal window. Then follow the on-screen instructions. Tested on High Sierra, Mojave and Catalina.
 
 Download location: https://github.com/chriswayg/CC-Offline-Package-Generator/releases/
 
