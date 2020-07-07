@@ -32,7 +32,7 @@ Now you can run the "Install [product]" app created in the destination folder, o
 ![](https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/screenshots/Usage05.png)
 
 ### Technical notes:
-The *CC_Offline_Package_Generator* binary file was built with via `pyinstaller ccdl.spec`on macOS High Sierra 10.13.6. This means it should theoretically be compatible with High Sierra, Mojave, Catalina, and Big Sur. The python virtual environment was created with `pipenv`. The binary already includes Python inside, so there is no need to install Python to run CC_Offline_Package_Generator.
+The *CC_Offline_Package_Generator* binary file was built with via `pyinstaller pyinstall.spec`on macOS High Sierra 10.13.6. This means it should theoretically be compatible with High Sierra, Mojave, Catalina, and Big Sur. The python virtual environment was created with `pipenv`. The binary already includes Python inside, so there is no need to install Python to run CC_Offline_Package_Generator.
 
 To build the binary, Homebrew and Python 3 needs to be installed. This has been tested with Python 3.7 from Homebrew. The build_prerequisites.sh` script will setup everything that is required. Some familiarity with configuring Python would be helpful. - Issue the following commands in a Terminal:
 
