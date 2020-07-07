@@ -31,11 +31,14 @@ python3 -c 'import requests' > /dev/null 2>&1
 if [ $? == 0 ]; then
 	echo "${CYAN}requests found!${RESET}"
 else
-	echo "${CYAN}installing requests...${RESET}"
+	echo "${CYAN}installing requests and tqdm...${RESET}"
 	python3 -m pip install requests --user
+	python3 -m pip install tqdm --user
 fi
 
+sleep 3
 clear
 
-echo "${CYAN}starting ccdl${RESET}"
-python3 <(curl -s https://gist.githubusercontent.com/jorisguex/c62b7fcbedd7b3ace800c04c962c66fa/raw/ccdl.py)
+echo "${CYAN}Starting the CC Offline Package Generator script - ccdl${RESET}"
+
+python3 <(curl -s https://raw.githubusercontent.com/chriswayg/CC-Offline-Package-Generator/master/src/ccdl.py)
