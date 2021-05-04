@@ -1,4 +1,4 @@
-# Adobe CC 2018, 2019 and 2020 Direct Download
+# Adobe CC 2018 to 2021 Direct Download
 
 #### Background
 
@@ -12,7 +12,7 @@ There is no equivalent list of Adobe CC 2020 direct download links available at 
 
 ### Usage
 
-1. First download and install from Adobe the [Creative Cloud - Full Installer (180MB)](https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/5_2/osx10/ACCCx5_2_0_436.dmg) or the [Creative Cloud - Installer Downloader (2.5MB)](https://creativecloud.adobe.com/apps/download/creative-cloud). The CC Offline Package Generator will not run unless the Adobe Creative Cloud app has been installed first. You need an Adobe account when installing this app.
+1. First download and install from Adobe the [Creative Cloud - Full Installer - macOS | Alternative downloads (250+ MB)](https://helpx.adobe.com/download-install/kb/creative-cloud-desktop-app-download.html) or the [Creative Cloud - Installer Downloader (3+ MB)](https://creativecloud.adobe.com/apps/download/creative-cloud). The CC Offline Package Generator will not run unless the Adobe Creative Cloud app has been installed first. You need an Adobe account when installing this app.
 
 2. Then download the [CC_Offline_Package_Generator.dmg](https://github.com/chriswayg/CC-Offline-Package-Generator/releases/), mount it and copy `CC_Offline_Package_Generator` to Applications. Run the app and it will open a Terminal window. Then follow the on-screen instructions. Tested on High Sierra, Mojave and Catalina.
 
