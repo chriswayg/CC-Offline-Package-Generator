@@ -47,7 +47,9 @@ Make sure you install the [Adobe Creative Cloud App](https://creativecloud.adobe
 Currently most installers work, but the following are known not to work:
 - Acrobat does not show up in the list, as is not made available form the Adobe servers in the same way.
 - Muse (Install MUSE_2018.1.1-en_US) will stop with an error, but inside the installer app folder the app in AdobeMuse2018.1.1-core.zip will work in English. Alternatively ProDesign Tools has a download link for Muse_2018_0_CC_LS24.dmg
-- Lightroom CC (Install LRCC_3.3-en_US) will stop with an error, but Lightroom Classic (Install LTRM_9.3-en_US) works fine.
+- Lightroom CC (Install LRCC_3.3-en_US) will stop with an error.
+- Lightroom Classic 10.x downloads fail, but 9.x (such as Install LTRM_9.4-en_US) works fine.
+- also see bug reports in https://github.com/chriswayg/CC-Offline-Package-Generator/issues
 
 ### Technical notes:
 The *CC_Offline_Package_Generator* binary file was built with via `pyinstaller pyinstall.spec`on macOS High Sierra 10.13.6. This means it should theoretically be compatible with High Sierra, Mojave, Catalina, and Big Sur. The python virtual environment was created with `pipenv`. The binary already includes Python inside, so there is no need to install Python to run CC_Offline_Package_Generator.
