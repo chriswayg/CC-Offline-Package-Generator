@@ -371,7 +371,7 @@ if __name__ == '__main__':
                stdin=PIPE) as p:
         p.communicate(INSTALL_APP_APPLE_SCRIPT.encode('utf-8'))
 
-    icon_path = '/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Install.app/Contents/Resources/app.icns'
+    icon_path = '/Library/Application Support/Adobe/Adobe Desktop Common/HDBox/Install.app/Contents/Resources/CreativeCloudInstaller.icns'
     shutil.copyfile(icon_path, os.path.join(install_app_path, 'Contents', 'Resources', 'applet.icns'))
 
     products_dir = os.path.join(install_app_path, 'Contents', 'Resources', 'products')
