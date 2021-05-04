@@ -5,10 +5,10 @@
 Adobe used to make Adobe CC trial full offline installer packages available via direct downloads as seen in the links for Adobe CC 2018 and 2019:
 - [Adobe CC 2018 Direct Download Links: Creative Cloud 2018 Release](https://prodesigntools.com/adobe-cc-2018-direct-download-links.html)
 - [All the New Adobe CC 2019 Direct Download Links, Now Available!](https://prodesigntools.com/adobe-cc-2019-direct-download-links.html)
-- [How to Get New Adobe Creative Cloud 2020 Direct Download Links](https://prodesigntools.com/creative-cloud-2020-direct-download-links.html)
+- [How to Get New Adobe Creative Cloud 2021 Direct Download Links | ProDesignTools](https://prodesigntools.com/creative-cloud-2021-direct-download-links.html)
 - [Why Direct Download Links Are Needed | ProDesignTools](https://prodesigntools.com/adobe-cc-no-more-direct-download-links.html#the-need)
 
-There is no equivalent list of Adobe CC 2020 direct download links available at this time, but the *CC_Offline_Package_Generator* script can download the files directly from Adobe and create an installer package. *(This GitHub repository is not associated with or endorsed by Adobe or ProDesign Tools. Links to ProDesign and Adobe are provided to give additional background information on the issue of Direct Downloads of the Adobe CC offline installers and to give easy access to the various ways of downloading Adobe software.)*
+There is no equivalent list of Adobe CC 2020 or 2021 direct download links available at this time, but the *CC_Offline_Package_Generator* script can download the files directly from Adobe and create an installer package. *(This GitHub repository is not associated with or endorsed by Adobe or ProDesign Tools. Links to ProDesign and Adobe are provided to give additional background information on the issue of Direct Downloads of the Adobe CC offline installers and to give easy access to the various ways of downloading Adobe software.)*
 
 ### Usage
 
