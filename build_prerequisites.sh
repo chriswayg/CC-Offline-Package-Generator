@@ -21,8 +21,8 @@ else
     echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-if command -v python3.7 > /dev/null 2>&1; then
-	  echo "${cyan}Python 3.7 found!${reset}"
+if command -v python3 > /dev/null 2>&1; then
+	  echo "${cyan}Python 3 found!${reset}"
 else
     # currently this will install Python version 3.7.x
     echo "${cyan}Installing Python 3 via Homebrew...${reset}"
@@ -32,7 +32,7 @@ fi
 # check for presence of commands and install, if needed
 command -v platypus >/dev/null 2>&1  || brew install platypus
 command -v create-dmg >/dev/null 2>&1 || brew install create-dmg
-command -v pipenv >/dev/null 2>&1 || pip3 install pipenv==2020.5.28
+command -v pipenv >/dev/null 2>&1 || pip3 install pipenv
 
 # set language environment to prevent pip locale errors
 echo -e 'export LC_ALL=en_US.UTF-8\nexport LANG=en_US.UTF-8' >> ~/.bash_profile

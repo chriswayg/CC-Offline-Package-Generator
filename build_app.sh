@@ -8,7 +8,7 @@ printf "${color}*** Checking for build prerequisites${reset}\n"
 
 [[ -d "$(xcode-select -p)" ]]  || { echo "${color}Xcode tools are missing! Run build_prerequisites.sh first.${reset}\n" && exit 1; }
 
-checkPrereqs=("python3.7" \
+checkPrereqs=("python3" \
               "brew" \
               "platypus" \
               "create-dmg" \

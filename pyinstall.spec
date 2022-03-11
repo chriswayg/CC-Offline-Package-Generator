@@ -1,5 +1,4 @@
 # -*- mode: python ; coding: utf-8 -*-
-import pkg_resources.py2_warn
 
 block_cipher = None
 
@@ -7,7 +6,6 @@ a = Analysis(['src/ccdl.py'],
              pathex=['CC-Offline-Package-Generator'],
              binaries=[],
              datas=[],
-             hiddenimports=['pkg_resources.py2_warn'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
