@@ -115,11 +115,10 @@ The developer of the script, [ayyybe](https://gist.github.com/ayyybe), explains 
 
 - [create-dmg](https://github.com/create-dmg/create-dmg): A shell script to build fancy DMGs
 
-### Credits and notes:
+### Credits and notes
 
-- The python script was initially forked from [ayyybe/ccdl.command](https://gist.github.com/ayyybe/a5f01c6f40020f9a7bc4939beeb2df1d) with a progressbar added from jorisguex's GitHub Gist fork. After ayyybe stopped updating the script it was further developed by [  
-  SaadBazaz](https://gist.github.com/SaadBazaz)/[ccdl.command](https://gist.github.com/SaadBazaz/37f41fffc66efea798f19582174e654c), as well as [thpryrchn](https://gist.github.com/thpryrchn)/[ccdl.command](https://gist.github.com/thpryrchn/c0ea1b6793117b00494af5f05959d526) and possibly others.
+- The python script was initially forked from [ayyybe/ccdl.command](https://gist.github.com/ayyybe/a5f01c6f40020f9a7bc4939beeb2df1d) with a progressbar added from jorisguex's GitHub Gist fork. After ayyybe stopped updating the script it was further developed by [SaadBazaz](https://gist.github.com/SaadBazaz/37f41fffc66efea798f19582174e654c), as well as [thpryrchn](https://gist.github.com/thpryrchn/c0ea1b6793117b00494af5f05959d526) and possibly others.
 - Based on this Drovosek01 created an updated version called [adobe-packager](https://github.com/Drovosek01/adobe-packager) which forms the basis of this app. *(The currently working script version [adobe-packager](https://github.com/Drovosek01/adobe-packager) might get updated more frequently than my app.)*
-- I merely created the *CC_Offline_Package_Generator* app which is `ccdl.py` packaged together with Python 3 using *pyinstaller* as well as adding the *.app* and *.dmg *packaging.
+- I merely created the *CC_Offline_Package_Generator* app which is the `ccdl.py` script packaged together with Python 3 using *pyinstaller* as well as adding the *.app* and *.dmg* packaging.
 - *CC Folder Icon* by [Baklay](https://www.deviantart.com/baklay/gallery) and Arrow Vectors by [Vecteezy](https://www.vecteezy.com/free-vector/arrow)
 - Lincense: GPL 3.0 for my portions of the code
