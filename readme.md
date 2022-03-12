@@ -75,7 +75,7 @@ Then issue the following commands:
 cd ~
 git clone https://github.com/chriswayg/CC-Offline-Package-Generator.git
 cd ~/CC-Offline-Package-Generator
-./build_prerequisites.sh
+sudo true && ./build_prerequisites.sh
 ```
 
 Once the build prerequisites were susccessfully installed, open a new Terminal tab and continue with:

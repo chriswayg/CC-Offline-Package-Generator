@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -o errexit
 
+# Launch script with: sudo true && ./build_prerequisites.sh
+# because the Homebrew command expects access to sudo but is run non-interactively.
+
 cyan="$(tput bold; tput setaf 5)"
 reset="$(tput sgr0)"
 
@@ -17,8 +20,7 @@ fi
 if command -v brew > /dev/null 2>&1; then
     echo "${cyan}Homebrew found!${reset}"
 else
-    echo "${cyan}This script may have to be restarted after Homebrew is installed${reset}"
-    # updated the Homebrew install command due to issues with sudo.
+    echo "${cyan}Installing Homebrew... ${reset}"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
@@ -38,5 +40,5 @@ command -v pipenv >/dev/null 2>&1 || pip3 install pipenv
 # set language environment to prevent pip locale errors
 echo -e 'export LC_ALL=en_US.UTF-8\nexport LANG=en_US.UTF-8' >> ~/.bash_profile
 
-echo "${cyan}Looks good! Open a new shell and run `pipenv install` and `pipenv shell` first,"
-echo "as the build script should be run in a virtual environment. Then run `./build_app.sh` ${reset}"
+echo "${cyan}Looks good! Open a new shell and run 'pipenv install' and 'pipenv shell' first,"
+echo "as the build script should be run in a virtual environment. Then run './build_app.sh' ${reset}"
