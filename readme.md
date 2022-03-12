@@ -16,7 +16,7 @@ There is no equivalent list of Adobe CC 2020 to 2022 direct download links avail
 
 ### Usage
 
-1. First download and install from Adobe the [Creative Cloud - Full Installer (250+ MB)](https://helpx.adobe.com/download-install/kb/creative-cloud-desktop-app-download.html) *(scroll down to macOS | Alternative downloads)* or if you prefer the [Creative Cloud - Installer Downloader (3+ MB)](https://creativecloud.adobe.com/apps/download/creative-cloud). The CC Offline Package Generator will not run unless the Adobe Creative Cloud app has been installed first. You need an Adobe account when installing this app.
+1. First download and install from Adobe the [Creative Cloud - Full Installer (250+ MB)](https://helpx.adobe.com/download-install/kb/creative-cloud-desktop-app-download.html) *(scroll down to macOS | Alternative downloads)* or if you prefer, use the [Creative Cloud - Installer Downloader (3+ MB)](https://creativecloud.adobe.com/apps/download/creative-cloud). The CC Offline Package Generator will not run unless the Adobe Creative Cloud app has been installed first. You need an Adobe account when installing this app.
 
 2. Then download the [CC_Offline_Package_Generator.dmg](https://github.com/chriswayg/CC-Offline-Package-Generator/releases/), mount it and copy `CC_Offline_Package_Generator` to Applications. Run the app and it will open a Terminal window. Then follow the on-screen instructions. Tested from High Sierra up to Monterey.
 
@@ -59,7 +59,13 @@ The *CC_Offline_Package_Generator* binary file was built with via `pyinstaller p
 
 ### Build instructions
 
-To build the app, *Homebrew* and *Python 3* need to be installed. This has been tested with Python 3.9 from Homebrew. The `build_prerequisites.sh` script will setup everything that is required. Some familiarity with configuring Python would be helpful. - Issue the following commands in a Terminal:
+To build the app, *Homebrew* and *Python 3* need to be installed. This has been tested with Python 3.9 from Homebrew. The `build_prerequisites.sh` script will setup everything that is required. Some familiarity with configuring Python would be helpful. Check for potentially conflicting python installations with the Terminal command:
+
+```shell
+/bin/bash -c "$(curl -fsSL https://gist.githubusercontent.com/chriswayg/ee97606a4dc93a4cdacff90915d5d1e5/raw/pythonlister.sh)"
+```
+
+Then issue the following commands:
 
 ```shell
 cd ~
@@ -68,16 +74,17 @@ cd ~/CC-Offline-Package-Generator
 ./build_prerequisites.sh
 ```
 
-Open a new Terminal tab and continue with:
+Once the build prerequisites were susccessfully installed, open a new Terminal tab and continue with:
 
 ```shell
 cd ~/CC-Offline-Package-Generator
 pipenv install
 pipenv shell
+pip list
 ./build_app.sh
 ```
 
-This will produce the `CC_Offline_Package_Generator.dmg` installer in the `dmg/` directory.
+With `pip list` you can check, that your build environment has been correctly initialized with `pyinstaller`, `requests` and `tqdm`.  The build script will create the `CC_Offline_Package_Generator.dmg` installer in the `dmg/` directory.
 
 ---
 

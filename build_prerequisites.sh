@@ -39,4 +39,4 @@ command -v pipenv >/dev/null 2>&1 || pip3 install pipenv
 echo -e 'export LC_ALL=en_US.UTF-8\nexport LANG=en_US.UTF-8' >> ~/.bash_profile
 
 echo "${cyan}Looks good! Open a new shell and run `pipenv install` and `pipenv shell` first,"
-echo "as the build script should be run in a virtual environment. Then run `build_app.sh` ${reset}"
+echo "as the build script should be run in a virtual environment. Then run `./build_app.sh` ${reset}"
