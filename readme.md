@@ -73,7 +73,7 @@ Then issue the following commands:
 
 ```shell
 cd ~
-git clone https://github.com/chriswayg/CC-Offline-Package-Generator.git
+git clone --recurse-submodules https://github.com/chriswayg/CC-Offline-Package-Generator.git
 cd ~/CC-Offline-Package-Generator
 sudo true && ./build_prerequisites.sh
 ```
