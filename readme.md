@@ -61,16 +61,18 @@ The *CC_Offline_Package_Generator* binary file was built with via `pyinstaller p
 
 To build the app, *Homebrew* and *Python 3* need to be installed. This has been tested with Python 3.9 from Homebrew. The `build_prerequisites.sh` script will setup everything that is required. Some familiarity with configuring Python would be helpful. - Issue the following commands in a Terminal:
 
-```
+```shell
+cd ~
 git clone https://github.com/chriswayg/CC-Offline-Package-Generator.git
-cd CC-Offline-Package-Generator
+cd ~/CC-Offline-Package-Generator
 ./build_prerequisites.sh
 ```
 
 Open a new Terminal tab and continue with:
 
-```
-cd CC-Offline-Package-Generator
+```shell
+cd ~/CC-Offline-Package-Generator
+pipenv install
 pipenv shell
 ./build_app.sh
 ```
